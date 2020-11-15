@@ -18,13 +18,13 @@ public class FirstSeleniumTest {
     public void setUp() {
 //        wd = new FirefoxDriver();
         wd = new ChromeDriver();
-        wd.get("https://www.apple.com/ru/");
+        wd.get("https://www.apple.com/");
         wd.manage().window().maximize();
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Test
-    public void openSamsungTest() {
+    public void openAppleTest() {
         System.out.println("site opened!!");
 
         wd.findElement(By.cssSelector("#ac-gn-link-search")).click();
