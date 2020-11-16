@@ -11,17 +11,8 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class FirstSeleniumTest {
-    WebDriver wd;
+public class FirstSeleniumTest extends TestBase {
 
-    @BeforeMethod
-    public void setUp() {
-//        wd = new FirefoxDriver();
-        wd = new ChromeDriver();
-        wd.get("https://www.apple.com/");
-        wd.manage().window().maximize();
-        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
 
     @Test
     public void openAppleTest() {
@@ -44,11 +35,7 @@ public class FirstSeleniumTest {
         System.out.println(title);
 
     }
-
-
-    @AfterMethod(enabled = false)
-    public void tearDown() {
-        wd.quit();
-    }
-
 }
+
+
+

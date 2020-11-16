@@ -9,11 +9,12 @@ public class CreateAccountTests extends TestBase {
 
     //    preconditions: user should be logged out
     @BeforeMethod
-    public void ensurePreconditions() {
-        wd.findElement(By.cssSelector("#ac-gn-bag")).click();
-        if (!isElementPresent(By.cssSelector("a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signIn']"))) {
-            wd.findElement(By.cssSelector("a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signOut']")).click();
+    public void ensurePreconditions1() {
+        click(By.cssSelector("#ac-gn-bag"));
+        if (!isSignInButtonPresent()) {
+            logOut();
 //            a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signOut']
+//            li[class='ac-gn-bagview-nav-item ac-gn-bagview-nav-item-signOut']
 //            a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signIn']
 //            #ac-gn-bag
         }
@@ -22,21 +23,20 @@ public class CreateAccountTests extends TestBase {
     @Test
     public void testSignIn() {
         //    click on SignUp button
-        wd.findElement(By.cssSelector("a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signIn']")).click();
+        click(By.cssSelector("a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signIn']"));
         Assert.assertTrue(isElementPresent(By.cssSelector("div[class='row rs-signin-main as-l-container']")));
-        //    fill registration form
-        wd.findElement(By.cssSelector("input[type='email']")).click();
-        wd.findElement(By.cssSelector("input[type='email']")).clear();
-        wd.findElement(By.cssSelector("input[type='email']")).sendKeys("knestyapin220178@mail.ru");
 
-        wd.findElement(By.cssSelector("input[type='password']")).click();
-        wd.findElement(By.cssSelector("input[type='password']")).clear();
-        wd.findElement(By.cssSelector("input[type='password']")).sendKeys("Pavel22011978");
+        //    fill registration form
+        type(By.cssSelector("input[type='email']"), "knestyapin220178@mail.ru");
+
+        type(By.cssSelector("input[type='password']"), "Pavel22011978");
 
 
 //    click submit button
-//        #signInButtonId
+        SubmitLogin();
 //    check login form displayed
+
+
 
     }
 

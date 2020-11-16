@@ -3,24 +3,29 @@ package com.example.SeleniumAppleProjectPresentation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
 
-    WebDriver wd;
+    static WebDriver wd;
 
-    @BeforeMethod
+    @BeforeSuite
     public void setUp() {
         wd = new ChromeDriver();
         wd.get("https://www.apple.com/");
         wd.manage().window().maximize();
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    @AfterSuite(enabled = false)
+    public void tearDown() {
+        wd.quit();
     }
 
     public boolean isElementPresent(By locator) {
@@ -44,8 +49,33 @@ public class TestBase {
         }
     }
 
-    @AfterMethod(enabled = false)
-    public void tearDown() {
-        wd.quit();
+
+
+    public boolean isLoginFormPresent() {
+        return isElementPresent(By.cssSelector(""));
+    }
+
+    public void type(By locator, String text) {
+        click(locator);
+        wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(text);
+    }
+
+    public void click(By locator) {
+        wd.findElement(locator).click();
+
+    }
+
+    public boolean isSignInButtonPresent() {
+        return isElementPresent(By.cssSelector("a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signIn']"));
+    }
+
+    public void logOut() {
+        click(By.cssSelector("a.ac-gn-bagview-nav-link.ac-gn-bagview-nav-link-signOut"));
+    }
+
+    public void SubmitLogin() {
+        new WebDriverWait(wd,10).until(ExpectedConditions.elementToBeClickable(By.cssSelector("#signInButtonId"))).click();
+//        click(By.cssSelector("#signInButtonId"));
     }
 }
