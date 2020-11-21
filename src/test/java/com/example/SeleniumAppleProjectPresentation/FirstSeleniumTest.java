@@ -1,37 +1,30 @@
 package com.example.SeleniumAppleProjectPresentation;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 public class FirstSeleniumTest extends TestBase {
 
 
-    @Test
+    @Test(enabled = true)
     public void openAppleTest() {
         System.out.println("site opened!!");
 
-        wd.findElement(By.cssSelector("#ac-gn-link-search")).click();
-        wd.findElement(By.cssSelector("#ac-gn-searchform-input")).click();
-        wd.findElement(By.cssSelector("#ac-gn-searchform-input")).sendKeys("iPhone SE" + Keys.ENTER);
-        String text = wd.findElement(By.cssSelector("div h2[class = 'as-productname as-util-relatedlink'][data-relatedlink = '1']")).getText();
+        app.getSearch().clickOnSearchPage();
+        app.getSearch().inputSearchForm();
+        app.getSearch().sendSearch();
+        String text = app.getSearch().getTextFromFirstPosition();
         System.out.println(text);
         Assert.assertEquals(text.toLowerCase(), "iphone se");
 
     }
 
     @Test
-    public void searchFromNavMenuTest() {
+    public void searchFromNavMenuTest()  {
 //        click on menu iPad
-        wd.findElement(By.cssSelector("a[class = 'ac-gn-link ac-gn-link-ipad']")).click();
-        String title = wd.findElement(By.cssSelector("a[class = 'ac-gn-link ac-gn-link-ipad']")).getText();
+
+        app.getHeader().clickOnHeaderMenuIPad();
+        String title = app.getHeader().getTextFromiPad();
         System.out.println(title);
 
     }

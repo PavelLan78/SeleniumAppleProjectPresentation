@@ -1,44 +1,28 @@
 package com.example.SeleniumAppleProjectPresentation;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CreateAccountTests extends TestBase {
 
-    //    preconditions: user should be logged out
     @BeforeMethod
     public void ensurePreconditions1() {
-        click(By.cssSelector("#ac-gn-bag"));
-        if (!isSignInButtonPresent()) {
-            logOut();
-//            a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signOut']
-//            li[class='ac-gn-bagview-nav-item ac-gn-bagview-nav-item-signOut']
-//            a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signIn']
-//            #ac-gn-bag
+        app.getHeader().clickOnBagButton();
+        if (!app.getUser().isSignInButtonPresent()) {
+            app.getUser().logOut();
         }
     }
 
-    @Test
-    public void testSignIn() {
-        //    click on SignUp button
-        click(By.cssSelector("a[class='ac-gn-bagview-nav-link ac-gn-bagview-nav-link-signIn']"));
-        Assert.assertTrue(isElementPresent(By.cssSelector("div[class='row rs-signin-main as-l-container']")));
+    @Test(enabled = false)
+    public void testSignIn() throws InterruptedException {
+        app.getUser().clickOnSignInButton();
+//        Assert.assertTrue(app.getHeader().isElementPresent(app.getUser().isSignInFormOpened()));
 
-        //    fill registration form
-        type(By.cssSelector("input[type='email']"), "knestyapin220178@mail.ru");
+        app.getUser().fillSignInForm(new User().setID("knestyapin220178@mail.ru").setPassword("Pavel22011978"));
+        app.getHeader().pause(2000);
 
-        type(By.cssSelector("input[type='password']"), "Pavel22011978");
-
-
-//    click submit button
-        SubmitLogin();
-//    check login form displayed
-
-
+        app.getUser().SubmitLogin();
 
     }
-
-
 }

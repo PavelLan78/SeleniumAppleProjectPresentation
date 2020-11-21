@@ -7,7 +7,7 @@ public class OpenHomePageTests extends TestBase{
     @Test
     public void homePageTest() {
         System.out.println("site opened!!");
-        System.out.println("WatchButton: " + isFindWatchButtonPresent());
+        System.out.println("WatchButton: " + app.getWatch().isFindWatchButtonPresent());
 
     }
 
